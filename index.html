@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <script>
+      // Gracefully ignore disabled Vite HMR/WebSocket errors in the preview iframe
+      window.addEventListener('error', function(event) {
+        var msg = (event && (event.message || '')) + ' ' + (event && event.filename || '');
+        if (msg.indexOf('WebSocket') !== -1 || msg.indexOf('@vite/client') !== -1 || msg.indexOf('createWebSocketModuleRunnerTransport') !== -1) {
+          event.preventDefault();
+          event.stopImmediatePropagation();
+          return true;
+        }
+      }, true);
+      window.addEventListener('unhandledrejection', function(event) {
+        var reason = event && event.reason ? String(event.reason.stack || event.reason) : '';
+        if (reason.indexOf('WebSocket') !== -1 || reason.indexOf('@vite/client') !== -1 || reason.indexOf('createWebSocketModuleRunnerTransport') !== -1) {
+          event.preventDefault();
+          event.stopImmediatePropagation();
+          return true;
+        }
+      }, true);
+    </script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Remix: Multiplayer Neon Snake</title>
+    <meta name="description" content="Collect orbs to dominate the neon grid in this real-time multiplayer snake game." />
+    <meta property="og:title" content="Remix: Multiplayer Neon Snake" />
+    <meta property="og:description" content="Collect orbs to dominate the neon grid in this real-time multiplayer snake game." />
+  </head>
+  <body class="bg-black overflow-hidden select-none">
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
